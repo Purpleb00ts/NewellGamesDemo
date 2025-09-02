@@ -75,11 +75,11 @@ How to run:
 
 - Application ports:
 
-    - Main app: 8080
-    - Notification-svc: 8081
-    - Mailhog: 8025
+    - Main app: http://localhost:8080/
+    - Notification-svc: http://localhost:8081/
+    - Mailhog: http://localhost:8025/
 
-- Mailhog: In my Demo I am using mailhog so you can see all emails the app is sending, in order to access it, just go to the port 8025 and you will be able to see the emails.
+- Mailhog: In my Demo I am using mailhog so you can see all emails the app is sending, in order to access it, just go to the port http://localhost:8025/ and you will be able to see the emails.
 
 - When application is running it will initialize 2 users and 3 games so you can easily test the functionalities:
   
