@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transactions - Newell Games</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/transactions.css}" />
+</head>
+<body>
+<div class="page-container">
+
+    <!-- Header -->
+    <div class="header" th:replace="~{fragments/header :: header}"></div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="transactions-container">
+            <h1>My Transactions</h1>
+
+            <div class="transaction-header">
+                <span>Transaction ID</span>
+                <span>User ID</span>
+                <span>Username</span>
+                <span>Amount</span>
+                <span>Type</span>
+                <span>Created On</span>
+                <span>Completed On</span>
+                <span>Status</span>
+            </div>
+
+            <ul class="transaction-list">
+                <li class="transaction-item" th:each="transaction : ${myTransactions}">
+                    <span th:text="${transaction.id}">1</span>
+                    <span th:text="${user.id}">101</span>
+                    <span th:text="${user.username}">PlayerOne</span>
+                    <span th:text="${transaction.amount}">$50.00</span>
+                    <span th:text="${transaction.type}">Deposit</span>
+                    <span th:text="${#temporals.format(transaction.createdOn, 'yyyy-MM-dd')}"></span>
+                    <span th:text="${#temporals.format(transaction.completedOn, 'yyyy-MM-dd')}"></span>
+                    <span th:text="${transaction.status}">Completed</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+</div>
+</body>
+</html>

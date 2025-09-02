@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit Profile - Newell Games</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/edit-profile.css}" />
+</head>
+<body>
+<div class="page-container">
+    <div class="header" th:replace="~{fragments/header :: header}"></div>
+
+    <div class="main-container">
+        <div class="edit-profile-container">
+            <form th:action="@{'/profile/' + ${user.id} + '/edit-profile'}" th:method="PUT" th:object="${editProfileRequest}">
+                <!-- Note: HTML forms do not support PUT method, so use POST + method override if needed -->
+
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" th:field="*{username}" required />
+                <div id="username-error" class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                <div class="error" th:text="${usernameAlreadyExistMessage}"></div>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" th:field="*{email}"/>
+                <div id="email-error" class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                <div class="error" th:text="${emailAlreadyExistMessage}"></div>
+
+                <label for="profilePicture">Profile Picture URL</label>
+                <input type="text" id="profilePicture" name="profilePicture" th:field="*{profilePicture}" />
+
+                <button class="save-button" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

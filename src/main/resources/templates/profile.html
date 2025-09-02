@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Profile - Newell Games</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}" />
+</head>
+<body>
+<div class="page-container">
+    <div class="header" th:replace="~{fragments/header :: header}"></div>
+
+    <div class="main-container">
+        <div class="profile-container">
+            <img th:src="${user.profilePicture}"
+                 onerror="this.src='https://openclipart.org/image/800px/346569';"
+                 alt="Profile Picture" />
+            <div class="profile-info">
+                <span><strong>Username:</strong> <span th:text="${user.username}"></span></span>
+                <span><strong>Email:</strong> <span th:text="${user.email}"></span></span>
+                <span><strong>Created On:</strong> <span th:text="${#temporals.format(user.createdOn, 'yyyy-MM-dd')}"></span></span>
+                <span><strong>Balance:</strong> <span th:text="${user.balance}"></span> €</span>
+                <span><strong>Role:</strong> <span th:text="${user.role}"></span></span>
+                <a th:href="@{'/profile/' + ${user.id} + '/edit-profile'}" class="edit-button">Edit Account</a>
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

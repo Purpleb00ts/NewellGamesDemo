@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Reviews - Newell Games</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/my-reviews.css}" />
+</head>
+<body>
+<div class="page-container">
+
+  <!-- Header -->
+  <div class="header" th:replace="~{fragments/header :: header}"></div>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <div class="reviews-container">
+      <ul class="reviews-list" th:each="review : ${reviews}">
+        <li class="review-item">
+          <div class="review-title" th:text="${review.title}">Review Title</div>
+          <div class="game-title" th:text="'Game: ' + ${review.game.title}">Game: Game Title</div>
+          <div class="review-meta" th:text="'Type: ' + ${review.type}">Type: Positive</div>
+          <div class="review-meta" th:text="'Username: ' + ${user.username}">Username: JohnDoe</div>
+          <div class="review-description" th:text="${review.reviewDescription}">
+            This game is amazing! I highly recommend it.
+          </div>
+        </li>
+      </ul>
+
+      <div class="empty-my-reviews" th:if="${#lists.isEmpty(user.myReviews)}">
+        You don't have any reviews.
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div th:insert="~{fragments/footer :: footer}"></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Newell Games</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/shop.css}">
+</head>
+<body>
+<div class="page-container">
+
+    <!-- Header -->
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <!-- Main content -->
+    <div class="main-container">
+        <div class="shop-container">
+            <h1>Shop</h1>
+
+            <form class="search-bar" th:action="@{/shop}" method="get">
+                <input type="text" name="query" placeholder="Search for games..." th:value="${query}">
+                <button type="submit">Search</button>
+            </form>
+
+            <div class="game-header">
+                <span>Cover</span>
+                <span>Title</span>
+                <span>Publisher</span>
+                <span>Price</span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="game-list" th:each="game : ${allGames}">
+                <li class="game-item">
+                    <img th:src="${game.imageUrl}" alt="Game" class="game-image">
+                    <span th:text="${game.title}">CyberWorld</span>
+                    <span th:text="${game.publisher}">Game Studio X</span>
+                    <span><span th:text="${game.price}"></span> €</span>
+
+                    <form th:if="!${ownedGameIds.contains(game.id)} and !${gamesAlreadyInCart.contains(game)}"
+                          th:action="@{'/shop/add-to-cart/' + ${game.id}}" th:method="POST">
+                        <button class="game-button">Add to Cart</button>
+                    </form>
+                    <span th:if="${ownedGameIds.contains(game.id)}">Owned</span>
+                    <span th:if="!${ownedGameIds.contains(game.id)} and ${gamesAlreadyInCart.contains(game)}">Already in Cart</span>
+
+                    <a href="#" class="game-button" th:href="@{'/reviews/' + ${game.id}}">Reviews</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+</div>
+</body>
+</html>

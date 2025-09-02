@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register - Newell Games</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/register.css}">
+</head>
+<body>
+<div class="page-container">
+    <div class="header">
+        <div class="logo">Newell Games</div>
+        <div class="buttons">
+            <a th:href="@{/login}">Login</a>
+            <a th:href="@{/}">Home</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="register-box">
+            <h2>Register</h2>
+            <form th:action="@{/register}" th:method="POST" th:object="${registerRequest}">
+                <input type="text" id="username" placeholder="Username" th:field="*{username}" required />
+                <div id="username-error" class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                <div class="error" th:text="${usernameAlreadyExistMessage}"></div>
+                <input type="password" id="password" placeholder="Password" th:field="*{password}" required />
+                <div id="password-error" class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <div th:insert="~{fragments/footer :: footer}">
+
+    </div>
+</div>
+</body>
+</html>

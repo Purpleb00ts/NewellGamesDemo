@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Review - Newell Games</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/add-review.css}" />
+</head>
+<body>
+<div class="page-container">
+
+    <div class="header" th:replace="~{fragments/header :: header}"></div>
+
+    <div class="main-container">
+        <div class="form-container">
+            <h2>Add Your Review</h2>
+            <form
+                    th:action="@{'/reviews/' + ${game.id} + '/add-review'}"
+                    th:object="${addReviewRequest}"
+                    method="POST"
+                    action="/reviews/add-review"
+            >
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" th:field="*{title}" required />
+
+                <label for="description">Description</label>
+                <textarea id="description" name="description" th:field="*{description}" required></textarea>
+
+                <label for="type">Type</label>
+                <select id="type" name="type" th:field="*{type}" required>
+                    <option value="">Select type</option>
+                    <option
+                            th:each="type : ${T(app.newellgames.review.model.ReviewType).values()}"
+                            th:value="${type}"
+                            th:text="${#strings.capitalize(#strings.toLowerCase(type))}"
+                    >
+                    </option>
+                </select>
+                <div class="error" th:text="${failedToPostReviewMessage}"></div>
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div th:insert="~{fragments/footer :: footer}"></div>
+
+</div>
+</body>
+</html>

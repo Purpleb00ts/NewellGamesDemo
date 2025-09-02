@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Notifications</title>
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" th:href="@{/css/notifications.css}">
+</head>
+<body>
+<div class="page-container">
+  <!-- Header Fragment -->
+  <div th:replace="fragments/header :: header"></div>
+
+  <div class="main-container">
+    <!-- Left Panel -->
+    <div class="left-panel">
+      <h2>Notification Dashboard</h2>
+
+      <p><strong>Current preferences:</strong></p>
+      <div>
+        <p>Notification Type: <span th:text="${notificationPreference.type}"></span></p>
+        <p>EMAIL: <span th:text="${#strings.isEmpty(notificationPreference.contactInfo) ? 'Edit profile and add email' : notificationPreference.contactInfo}"></span></p>
+        <p>Non-failed notifications: <span th:text="${succeededNotificationsNumber}"></span></p>
+        <p>Failed notifications: <span th:text="${failedNotificationsNumber}"></span></p>
+        <p th:if="${notificationPreference.enabled == true}">Notification state: <strong>ENABLED</strong></p>
+        <p th:if="${notificationPreference.enabled == false}">Notification state: <strong>DISABLED</strong></p>
+      </div>
+
+      <form class="notification-buttons" th:action="@{/notifications/user-preference}" th:method="POST">
+        <input type="hidden" name="_method" value="put"/>
+        <p><strong>Change state:</strong></p>
+        <button type="submit" name="enabled" value="true">Enable Notifications</button>
+        <button type="submit" name="enabled" value="false">Disable Notifications</button>
+        <div class="alert-warning" th:text="${notValidEmailMessage}"></div>
+      </form>
+
+      <div class="notification-buttons">
+        <p><strong>General Actions:</strong></p>
+        <div style="display: flex; gap: 10px;">
+          <form th:action="@{/notifications}" th:method="DELETE" style="margin: 0;">
+            <button type="submit">Clear History</button>
+          </form>
+
+          <form th:action="@{/notifications}" th:method="PUT" style="margin: 0;">
+            <button type="submit">Retry Failed</button>
+          </form>
+        </div>
+      </div>
+      <p class="alert-warning" th:text="${notificationServiceFailureMessage}"></p>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right-panel">
+      <h2>Notification History</h2>
+      <p>Your last 5 notifications from us:</p>
+
+      <div class="notification-history-header">
+        <span>Subject</span>
+        <span>Date</span>
+        <span>Status</span>
+        <span>Type</span>
+      </div>
+
+      <ul class="notification-list" th:each = "notification : ${notificationHistory}">
+        <li class="notification-header">
+          <span th:text="${notification.subject}">Subject</span>
+          <span th:text="${#temporals.format(notification.createdOn, 'yyyy-MM-dd')}">Date</span>
+          <span th:text="${notification.status}">Status</span>
+          <span th:text="${notification.type}">Type</span>
+        </li>
+      </ul>
+
+      <p class="alert-warning" th:text="${notificationServiceFailureMessage}"></p>
+    </div>
+    </div>
+  <div th:replace="fragments/footer :: footer"></div>
+  </div>
+</body>
+</html>

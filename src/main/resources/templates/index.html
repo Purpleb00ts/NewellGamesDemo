@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Newell Games</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
+</head>
+<body>
+<div class="page-container">
+    <div class="header">
+        <div class="logo">Newell Games</div>
+        <div class="buttons">
+            <a th:href="@{/login}">Login</a>
+            <a th:href="@{/register}">Register</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Welcome to Newell Games</h1>
+        <p>Your ultimate destination for gaming.</p>
+    </div>
+
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

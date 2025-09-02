@@ -1,0 +1,21 @@
+<div class="header" th:fragment="header">
+  <div class="left-section">
+    <a class="shop-button" href="/shop">Shop</a>
+    <a class="library-button" href="/library">Library</a>
+    <a class="users-button" href="/admin/users" th:if="${user.role == T(app.newellgames.user.model.UserRole).ADMIN}">Users</a>
+    <a class="transactions-button" href="/transactions/admin/all-transactions" th:if="${user.role == T(app.newellgames.user.model.UserRole).ADMIN}">Transactions</a>
+    <a class="notifications-button" href="/notifications">Notifications</a>
+  </div>
+  <div class="profile-section" tabindex="0">
+    <img th:src="${user.profilePicture}" onerror="this.src='https://openclipart.org/image/800px/346569';" alt="Image" class="profile-picture">
+    <span th:text = "${user.username}"></span>
+    <div class="dropdown">
+      <a th:href="@{'/profile/' + ${user.id}}">My Profile</a>
+      <a th:href="@{'/reviews/my-reviews'}">My Reviews</a>
+      <a href="/transactions/my-transactions">My Transactions</a>
+      <a href="/add-funds">Add Funds</a>
+      <a href="/cart">My Cart</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+</div>

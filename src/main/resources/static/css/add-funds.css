@@ -1,0 +1,64 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #1b2838;
+    color: white;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.funds-container {
+    max-width: 600px;
+    width: 100%;
+    background-color: #2a475e;
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.funds-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1b2838;
+    color: #c7d5e0;
+}
+
+.complete-transaction-button {
+    background-color: #66c0f4;
+    color: #000;
+    padding: 15px 25px;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.complete-transaction-button:hover {
+    background-color: #549fda;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0 15px 0;
+}

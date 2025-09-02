@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Funds - Newell Games</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/add-funds.css}" />
+</head>
+<body>
+<div class="page-container">
+
+    <!-- Header -->
+    <div class="header" th:replace="~{fragments/header :: header}"></div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="funds-container">
+            <h2>Add Funds</h2>
+            <form th:action="@{'/add-funds'}" th:method="POST" th:object="${depositRequest}">
+                <input type="number" class="funds-input" placeholder="Enter Amount" th:field="*{amount}" />
+                <div id="top-up-error" class="error" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+                <div class="error" th:text="${failedTopUpMessage}"></div>
+                <button type="submit" class="complete-transaction-button">Complete Transaction</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cart - Newell Games</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/cart.css}" />
+</head>
+<body>
+<div class="page-container">
+
+  <div class="header" th:replace="~{fragments/header :: header}"></div>
+
+  <div class="main-container">
+    <div class="container">
+      <h1>My Cart</h1>
+
+      <div class="cart-header">
+        <div>Cover</div>
+        <div>Game</div>
+        <div>Price</div>
+        <div>Action</div>
+      </div>
+
+      <div class="cart-item" th:each="item : ${cartItems}">
+        <img th:src="${item.getGame().getImageUrl()}" alt="Game Cover" />
+        <div th:text="${item.getGame().title}">Game Title</div>
+        <div th:text="${item.getGame().price} + ' €'">9.99 €</div>
+        <form th:action="@{'/cart/remove/' + ${item.id}}" th:method="post">
+          <button class="remove-button" type="submit">Remove</button>
+        </form>
+      </div>
+
+      <div class="empty-cart" th:if="${#lists.isEmpty(cartItems)}">
+        Your cart is empty.
+      </div>
+
+      <div class="cart-actions" th:if="${!#lists.isEmpty(cartItems)}">
+        <form th:action="@{'/cart/clear'}" th:method="post">
+          <button class="remove-button clear-cart-button" type="submit">Clear Cart</button>
+        </form>
+
+        <div style="font-size: 20px; color: #c7d5e0;">
+          Total: <span th:text="${#numbers.formatDecimal(totalPrice, 1, 2)} + ' €'">0.00 €</span>
+        </div>
+
+        <form th:action="@{'/cart/purchase'}" method="post">
+          <button class="remove-button purchase-button" type="submit">Purchase</button>
+          <div class="error" th:text="${failedPurchaseMessage}"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div th:insert="~{fragments/footer :: footer}"></div>
+
+</div>
+</body>
+</html>

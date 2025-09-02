@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Game - Newell Games</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/purchase.css}">
+</head>
+<body>
+<div class="header" th:replace="~{fragments/header :: header}"></div>
+<div class="purchase-container">
+    <div class="game-info">
+        <h3 th:text="${game.title}"></h3>
+        <img th:src="${game.picture}" alt="Game Image">
+        <div class="game-details">
+            <p>Publisher: <span th:text="${game.publisher}"></span></p>
+            <p>Price: <span th:text="${game.price}"></span></p>
+        </div>
+    </div>
+    <div class="confirmation-section">
+        <h2>Are you sure you want to confirm this transaction?</h2>
+        <p>Remaining Balance: <span th:text="${user.balance}"></span></p>
+        <a href="#" class="complete-transaction-button">Complete Transaction</a>
+    </div>
+</div>
+<div class="footer" th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

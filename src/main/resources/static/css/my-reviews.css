@@ -1,0 +1,72 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #1b2838;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.reviews-container {
+    width: 100%;
+    background-color: #2a475e;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.reviews-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.review-item {
+    background-color: #1b2838;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.review-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.game-title {
+    font-size: 18px;
+    font-weight: normal;
+    color: #c7d5e0;
+    margin-bottom: 12px;
+}
+
+.review-meta {
+    font-size: 16px;
+    color: #66c0f4;
+    margin-bottom: 8px;
+}
+
+.review-description {
+    font-size: 18px;
+}
+
+.empty-my-reviews {
+    text-align: center;
+    padding: 30px;
+    font-size: 20px;
+    color: #c7d5e0;
+}

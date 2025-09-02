@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Users - Newell Games</title>
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" th:href="@{/css/users.css}">
+</head>
+<body>
+<div class="page-container">
+
+  <!-- Header -->
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <div class="container">
+      <h1>All Users</h1>
+
+      <form class="search-bar" th:action="@{/admin/users}" method="get">
+        <input type="text" name="query" placeholder="Search for users..." th:value="${query}">
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="user-header">
+        <span>ID</span>
+        <span>Username</span>
+        <span>Email</span>
+        <span>Balance</span>
+        <span>Active</span>
+        <span>Role</span>
+      </div>
+
+      <ul class="user-list">
+        <li class="user-item" th:each="curentUser : ${users}">
+          <span th:text="${curentUser.id}">1</span>
+          <span th:text="${curentUser.username}">PlayerOne</span>
+          <span th:text="${#strings.isEmpty(curentUser.email) ? 'no email' : curentUser.email}">playerone@example.com</span>
+          <span th:text="${curentUser.balance}">$50.00</span>
+
+          <form th:action="@{'/admin/users/switch-status/' + ${curentUser.id}}" method="post">
+            <label class="switch">
+              <input type="checkbox"
+                     name="isActive"
+                     th:checked="${curentUser.isActive() == true}"
+                     onchange="this.form.submit()">
+              <span class="slider"></span>
+            </label>
+          </form>
+
+          <form th:action="@{'/admin/users/switch-role/' + ${curentUser.id}}" method="post">
+            <label class="switch">
+              <input type="checkbox"
+                     name="isAdmin"
+                     th:checked="${curentUser.role == T(app.newellgames.user.model.UserRole).ADMIN}"
+                     onchange="this.form.submit()">
+              <span class="slider"></span>
+            </label>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div th:replace="~{fragments/footer :: footer}"></div>
+
+</div>
+</body>
+</html>

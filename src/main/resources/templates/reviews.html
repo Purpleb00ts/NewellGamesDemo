@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reviews - Newell Games</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reviews.css}" />
+</head>
+<body>
+<div class="page-container">
+
+    <!-- Header -->
+    <div class="header" th:replace="~{fragments/header :: header}"></div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="reviews-container">
+            <a href="/add-review"
+               class="add-review-button"
+               th:href="@{'/reviews/' + ${game.id} + '/add-review'}"
+               th:if="${userOwnsThisGame}">
+                Add Review
+            </a>
+
+            <ul class="reviews-list" th:each="review : ${reviews}">
+                <li class="review-item">
+                    <div class="review-title" th:text="${review.title}">Game Title</div>
+                    <div class="review-meta" th:text="'Type: ' + ${review.type}">Type: Positive</div>
+                    <div class="review-meta" th:text="'Username: ' + ${review.author.getUsername()}">Username: JohnDoe</div>
+                    <div class="review-meta" th:text="'Game Title: ' + ${game.title}">Game Title: Super Game</div>
+                    <div class="review-description" th:text="${review.reviewDescription}">
+                        This game is amazing! I highly recommend it.
+                    </div>
+                </li>
+            </ul>
+
+            <div class="empty-reviews" th:if="${#lists.isEmpty(game.reviews)}">
+                Game doesn't have any reviews yet.
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+
+</div>
+</body>
+</html>
