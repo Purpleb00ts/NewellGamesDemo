@@ -26,7 +26,7 @@ services:
       - "${MAILHOG_SMTP_PORT:-1025}:1025"
 
   app:
-    build: ../NewellGamesDemo
+    build: .
     image: newellgames/app:latest
     container_name: ng-app
     depends_on:
