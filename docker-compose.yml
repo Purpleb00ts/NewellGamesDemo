@@ -46,7 +46,7 @@ services:
       - "${APP_PORT:-8080}:8080"
 
   notification-service:
-    build: ../NotificationServiceDemo
+    build: ./notification-service
     image: newellgames/notification-service:latest
     container_name: ng-notification
     depends_on:
