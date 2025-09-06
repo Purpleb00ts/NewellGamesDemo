@@ -47,6 +47,8 @@ Tech Stack:
 
 - Docker
 
+- Swagger (Small documentation of REST API endpoints)
+
 Future improvements:
 
 - Separating UserService (UserService is large), planned to be split into smaller services
@@ -78,6 +80,7 @@ How to run:
     - Main app: http://localhost:8080/
     - Notification-svc: http://localhost:8081/
     - Mailhog: http://localhost:8025/
+    - Swagger: http://localhost:8081/swagger-ui/index.html
 
 - Mailhog: In my Demo I am using mailhog so you can see all emails the app is sending, in order to access it, just go to the port http://localhost:8025/ and you will be able to see the emails (by default every user has notifications DISABLED, if you want to see the emails you'll have to go to the Notifications tab in the navigation header and ENABLE notifications).
 

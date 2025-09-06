@@ -27,7 +27,7 @@ public class NotificationController {
         this.notificationService = notificationService;
     }
 
-    @Operation(summary = "Create new Notification Preference", description = "Returns the created notification preference.")
+    @Operation(summary = "Create new Notification Preference", description = "Returns the created notification preference")
     @PostMapping("/preferences")
     public ResponseEntity<NotificationPreferenceResponse> upsertNotificationPreference(@RequestBody UpsertNotificationPreference upsertNotificationPreference) {
 
@@ -40,6 +40,7 @@ public class NotificationController {
                 .body(responseDto);
     }
 
+    @Operation(summary = "Get requested Notification Preference", description = "Returns requested notification preference from DB")
     @GetMapping("/preferences")
     public ResponseEntity<NotificationPreferenceResponse> getUserNotificationPreference(@RequestParam(name = "userId") UUID userId) {
 
@@ -52,6 +53,7 @@ public class NotificationController {
                 .body(responseDto);
     }
 
+    @Operation(summary = "Send notification to the user", description = "Returns notification that was sent")
     @PostMapping
     public ResponseEntity<NotificationResponse> sendNotification(@RequestBody NotificationRequest notificationRequest) {
 
@@ -66,6 +68,7 @@ public class NotificationController {
                 .body(response);
     }
 
+    @Operation(summary = "Gets users notification history", description = "Returns notifications that were sent to the user")
     @GetMapping
     public ResponseEntity<List<NotificationResponse>> getNotificationHistory(@RequestParam(name = "userId") UUID userId) {
 
@@ -76,6 +79,7 @@ public class NotificationController {
                 .body(notificationHistory);
     }
 
+    @Operation(summary = "Change notification preference", description = "Returns changed notification preference")
     @PutMapping("/preferences")
     public ResponseEntity<NotificationPreferenceResponse> changeNotificationPreference(@RequestParam(name = "userId") UUID userId, @RequestParam(name = "enabled") boolean enabled) {
 
@@ -88,7 +92,7 @@ public class NotificationController {
                 .body(responseDto);
     }
 
-    // DELETE /api/v1/notifications
+    @Operation(summary = "Clears notification history", description = "Returns status 200 - OK with an empty body")
     @DeleteMapping
     public ResponseEntity<Void> clearNotificationHistory(@RequestParam(name = "userId") UUID userId) {
 
@@ -97,6 +101,7 @@ public class NotificationController {
         return ResponseEntity.ok().body(null);
     }
 
+    @Operation(summary = "Simple test to display Hello, (name) user!", description = "Returns a string")
     //  Endpoint: GET /api/v1/notifications/test  = "Hello, unknown user!"
     @GetMapping("/test")
     public ResponseEntity<String> getHelloWorld(@RequestParam(name = "name") String name) {
@@ -104,6 +109,7 @@ public class NotificationController {
         return ResponseEntity.ok("Hello, " + name + " user!");
     }
 
+    @Operation(summary = "Tries to re-send notifications with status failed", description = "Returns status 200 - OK with an empty body")
     @PutMapping
     public ResponseEntity<Void> retryFailedNotifications(@RequestParam(name = "userId") UUID userId) {
 
