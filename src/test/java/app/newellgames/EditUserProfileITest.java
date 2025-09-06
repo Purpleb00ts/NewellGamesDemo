@@ -111,7 +111,6 @@ public class EditUserProfileITest {
         userService.editProfile(userWithSameEmail, editProfileRequestForUserWithSameEmail);
 
         userToEdit = userRepository.findById(userToEdit.getId()).orElseThrow();
-        userWithSameEmail = userRepository.findByEmail(userWithSameEmail.getEmail()).orElseThrow();
 
         User finalUserToEdit = userToEdit;
 
@@ -126,13 +125,13 @@ public class EditUserProfileITest {
                 .password("password")
                 .build();
 
-        RegisterRequest registerRequestUserWithSameEmail = RegisterRequest.builder()
+        RegisterRequest registerRequestUserWithSameUsername = RegisterRequest.builder()
                 .username("testuser2")
                 .password("password")
                 .build();
 
         User userToEdit = userService.register(registerRequestInitialUser);
-        userService.register(registerRequestUserWithSameEmail);
+        userService.register(registerRequestUserWithSameUsername);
 
         EditProfileRequest editProfileRequestForUserToEdit = EditProfileRequest.builder()
                 .username("testuser2")
