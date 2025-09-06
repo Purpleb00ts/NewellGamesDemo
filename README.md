@@ -57,6 +57,8 @@ Future improvements:
 
 - Add an option of obtaining games through Access Keys (enter the key -> get the game without purchasing)
 
+- Implement JWT token authentication/authorization
+
 - Improve UI (HTML/CSS)
 
 - Create a server from where users will download games
